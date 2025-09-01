@@ -1,6 +1,7 @@
 ### CUSTOM ###
 application-local.yml
 chat-memory
+document
 
 HELP.md
 target/
