@@ -3,6 +3,8 @@ package com.yiye.app;
 import com.yiye.advisor.MyLoggerAdvisor;
 import com.yiye.advisor.ReReadingAdvisor;
 import com.yiye.chatmemory.FileBasedChatMemory;
+import com.yiye.rag.LoveAppRagCustomAdvisorFactory;
+import com.yiye.rag.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -42,6 +44,9 @@ public class LoveApp {
 
     @Resource
     private Advisor loveAppRagCloudAdvisor;
+
+    @Resource
+    private QueryRewriter queryRewriter;
 
     /**
      * 初始化 AI 客户端
@@ -108,9 +113,13 @@ public class LoveApp {
     }
 
     public String doChatWithRag(String message, String chatId) {
+        // 查询重写
+        String rewritterMessage = queryRewriter.doQueryRewrite(message);
         ChatResponse chatResponse = chatClient
                 .prompt()
-                .user(message)
+                // .user(message)
+                // 使用改写后的查询
+                .user(rewritterMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 // 开启日志，便于观察效果
@@ -119,6 +128,10 @@ public class LoveApp {
                 // .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
                 // 应用增强检索服务（云知识库服务）
                 .advisors(loveAppRagCloudAdvisor)
+                // // 自定义检索增强过滤器（文档过滤 + 上下文增强）
+                // .advisors(LoveAppRagCustomAdvisorFactory.createLoveAppRagCustomAdvisor(
+                //         loveAppVectorStore, "单身"
+                // ))
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
