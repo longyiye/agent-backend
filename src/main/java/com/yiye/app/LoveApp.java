@@ -3,6 +3,7 @@ package com.yiye.app;
 import com.yiye.advisor.MyLoggerAdvisor;
 import com.yiye.advisor.ReReadingAdvisor;
 import com.yiye.chatmemory.FileBasedChatMemory;
+import com.yiye.constant.FileConstant;
 import com.yiye.rag.LoveAppRagCustomAdvisorFactory;
 import com.yiye.rag.QueryRewriter;
 import jakarta.annotation.Resource;
@@ -15,6 +16,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
 
@@ -48,6 +50,9 @@ public class LoveApp {
     @Resource
     private QueryRewriter queryRewriter;
 
+    @Resource
+    private ToolCallback[] allTools;
+
     /**
      * 初始化 AI 客户端
      *
@@ -57,8 +62,8 @@ public class LoveApp {
         // // 初始化基于内存的对话记忆
         // ChatMemory chatMemory = new InMemoryChatMemory();
         // 初始化基于文件的对话记忆
-        String fileDir = System.getProperty("user.dir") + "/chat-memory";
-        ChatMemory chatMemory = new FileBasedChatMemory(fileDir);
+        String FILE_DIR = FileConstant.FILE_SAVE_DIR + "/chat-memory";
+        ChatMemory chatMemory = new FileBasedChatMemory(FILE_DIR);
 
         chatClient = ChatClient.builder(dashscopeChatModel)
                 .defaultSystem(SYSTEM_PROMPT)
@@ -136,6 +141,22 @@ public class LoveApp {
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
         log.info("rag content: {}", content);
+        return content;
+    }
+
+    public String doChatWithTools(String message, String chatId) {
+        ChatResponse response = chatClient
+                .prompt()
+                .user(message)
+                .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
+                        .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
+                // 开启日志，便于观察效果
+                .advisors(new MyLoggerAdvisor())
+                .tools(allTools)
+                .call()
+                .chatResponse();
+        String content = response.getResult().getOutput().getText();
+        log.info("with tool content: {}", content);
         return content;
     }
 }
