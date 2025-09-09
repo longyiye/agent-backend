@@ -34,6 +34,7 @@ public class PgVectorVectorStoreConfig {
         // 加载文档
         List<Document> documents = loveAppDocumentLoader.loadMarkdowns();
         vectorStore.add(documents);
+        // todo: 尝试本地 docker 连接 postgreSQL
         return vectorStore;
     }
 }
