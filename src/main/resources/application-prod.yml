@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: agent-backend
+  datasource:
+    url: jdbc:postgresql://rm-cn-62l4f5hbc00068so.rwlb.rds.aliyuncs.com/ai_agent
+    username: longyiye
+    password: Zgl87129212!
+
+  ai:
+    dashscope:
+      api-key: "sk-2c10c7cb79364bd981fe7c95d8f8a16a"
+      chat:
+        options:
+          model: qwen-plus
+      ollama:
+        base-url: http://localhost:11434
+        chat:
+          model: qwen2:7b
+
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        dimensions: 1536
+        distance-type: COSINE_DISTANCE
+        max-document-batch-size: 10000 # Optional: Maximum number of documents per batch
+
+#    mcp:
+#      client:
+#        stdio:
+#          servers-configuration: classpath:mcp-servers.json
+#        sse:
+#          connections:
+#            server1:
+#              url: http://localhost:8127
+
+# searchApi
+search-api:
+  api-key: "44RMVYCGxvTFVLPET3tDVNwq"

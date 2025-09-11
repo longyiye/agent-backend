@@ -3,6 +3,7 @@ application-local.yml
 tmp
 document
 mcp-servers.json
+agent-backend.zip
 
 HELP.md
 target/
