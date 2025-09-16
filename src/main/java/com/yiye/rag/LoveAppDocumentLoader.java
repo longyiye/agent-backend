@@ -29,8 +29,13 @@ class LoveAppDocumentLoader {
             Resource[] resources = resourcePatternResolver.getResources("classpath:document/*.md");
             for (Resource resource : resources) {
                 String fileName = resource.getFilename();
-                // 提取文档倒数第 3 和第 2 个字作为标签
-                String status = fileName.substring(fileName.length() - 6, fileName.length() - 4);
+                // 提取文档后面的类型作为标签
+                String status = "";
+                int dashIndex = fileName.lastIndexOf(" - ");
+                int dotIndex = fileName.lastIndexOf(".md");
+                if (dashIndex != -1 && dotIndex != -1 && dashIndex < dotIndex) {
+                    status = fileName.substring(dashIndex + 3, dotIndex);
+                }
                 MarkdownDocumentReaderConfig config = MarkdownDocumentReaderConfig.builder()
                         .withHorizontalRuleCreateDocument(true)
                         .withIncludeCodeBlock(false)

@@ -12,7 +12,6 @@ public class TerminalOperationToolTest {
     public void testExecuteTerminalCommand() {
         TerminalOperationTool tool = new TerminalOperationTool();
         String command = "dir";
-        // todo: 当前输出的中文结果会乱码，需解决
         String result = tool.executeTerminalCommand(command);
         assertNotNull(result);
     }
