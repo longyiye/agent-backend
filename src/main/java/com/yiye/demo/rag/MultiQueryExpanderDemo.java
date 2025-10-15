@@ -28,4 +28,5 @@ public class MultiQueryExpanderDemo {
         List<Query> queries = queryExpander.expand(new Query(query));
         return queries;
     }
+
 }

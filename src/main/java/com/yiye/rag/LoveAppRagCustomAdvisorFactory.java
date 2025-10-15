@@ -30,4 +30,5 @@ public class LoveAppRagCustomAdvisorFactory {
                 .queryAugmenter(LoveAppContextualQueryAugmenterFactory.createInstance())
                 .build();
     }
+
 }

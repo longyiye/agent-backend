@@ -29,4 +29,5 @@ public class PgVectorVectorStoreConfigTest {
         List<Document> results = pgVectorVectorStore.similaritySearch(SearchRequest.builder().query("棒棒糖").topK(3).build());
         Assertions.assertNotNull(results);
     }
+
 }

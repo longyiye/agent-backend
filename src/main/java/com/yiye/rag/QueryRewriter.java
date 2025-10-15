@@ -30,4 +30,5 @@ public class QueryRewriter {
         // 输出重写后的查询
         return transformedQuery.text();
     }
+
 }

@@ -51,4 +51,5 @@ class LoveAppDocumentLoader {
         }
         return allDocuments;
     }
+
 }

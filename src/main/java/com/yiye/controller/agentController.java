@@ -108,4 +108,5 @@ public class agentController {
         Manus manus = new Manus(allTools, dashscopeChatModel);
         return manus.runStream(message);
     }
+
 }

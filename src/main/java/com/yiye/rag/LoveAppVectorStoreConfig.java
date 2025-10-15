@@ -35,4 +35,5 @@ public class LoveAppVectorStoreConfig {
         simpleVectorStore.add(enrichDocuments);
         return simpleVectorStore;
     }
+
 }

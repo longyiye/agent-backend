@@ -21,4 +21,5 @@ public class WebScrapingTool {
             return "Error scraping web page: " + e.getMessage();
         }
     }
+
 }

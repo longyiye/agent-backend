@@ -186,4 +186,5 @@ public abstract class BaseAgent {
     protected void cleanup() {
         // 子类可以重写此方法来清理资源  
     }
+
 }

@@ -25,4 +25,5 @@ public class SpringAiInvoke implements CommandLineRunner {
                 .getOutput();
         System.out.println(output.getText());
     }
+
 }

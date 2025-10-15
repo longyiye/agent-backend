@@ -16,4 +16,5 @@ public class ResourceDownloadToolTest {
         String result = tool.downloadResource(url, fileName);
         assertNotNull(result);
     }
+
 }

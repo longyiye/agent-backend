@@ -33,5 +33,6 @@ public class Manus extends ToolCallAgent {
                 .defaultAdvisors(new MyLoggerAdvisor())
                 .build();  
         this.setChatClient(chatClient);  
-    }  
+    }
+
 }

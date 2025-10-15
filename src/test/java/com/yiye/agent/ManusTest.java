@@ -19,4 +19,5 @@ class ManusTest {
         String answer = manus.run(userPrompt);
         Assertions.assertNotNull(answer);
     }
+
 }

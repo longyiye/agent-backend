@@ -13,4 +13,5 @@ public class LangChainInvoke {
         String answer = qwenModel.chat("我是小野狼");
         System.out.println(answer);
     }
+
 }

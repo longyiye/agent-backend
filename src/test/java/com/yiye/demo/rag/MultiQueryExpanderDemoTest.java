@@ -19,4 +19,5 @@ class MultiQueryExpanderDemoTest {
         List<Query> queries = multiQueryExpanderDemo.expand("小西瓜是谁");
         Assertions.assertNotNull(queries);
     }
+
 }

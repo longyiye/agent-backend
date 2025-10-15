@@ -49,4 +49,5 @@ public class PDFGenerationTool {
             return "Error generating PDF: " + e.getMessage();
         }
     }
+
 }

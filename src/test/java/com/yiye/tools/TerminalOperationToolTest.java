@@ -15,4 +15,5 @@ public class TerminalOperationToolTest {
         String result = tool.executeTerminalCommand(command);
         assertNotNull(result);
     }
+
 }

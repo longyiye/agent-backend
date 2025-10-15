@@ -36,4 +36,5 @@ public class PgVectorVectorStoreConfig {
         vectorStore.add(documents);
         return vectorStore;
     }
+
 }

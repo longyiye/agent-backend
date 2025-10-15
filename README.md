@@ -1,8 +1,8 @@
-## agent-backend
+# agent-backend
 
 一个基于 Spring Boot 3 的 AI Agent 后端示例工程，集成了 Spring AI（DashScope、Ollama）、Knife4j/Swagger、SSE 流式输出、向量存储（PGVector，可选）与 MCP（Model Context Protocol）客户端/服务端地图服务
 
-### 功能特性
+## 功能特性
 - **对话服务**: `LoveApp` 应用的同步与 SSE 流式对话接口
 - **SSE 多种形态**: Flux、ServerSentEvent、SseEmitter 三种方式
 - **AI 模型集成**: DashScope（通义千问）与本地 Ollama（可选）
@@ -12,12 +12,12 @@
   - 客户端：通过 `mcp-servers.json` 配置外部 MCP Server
   - 服务端：子模块 `image-search-mcp-server` 提供图片搜索 MCP Server 示例
 
-### 运行环境
+## 运行环境
 - JDK 21+
 - Maven 3.9+
 - 可选：Docker / Docker Compose、PostgreSQL（使用 PGVector 时）
 
-### 快速开始
+## 快速开始
 1) 安装依赖并打包
 ```bash
 mvn clean package -DskipTests
@@ -31,7 +31,7 @@ java -jar target/agent-backend-0.0.1-SNAPSHOT.jar
 3) 访问接口文档
 - Swagger/Knife4j: `http://localhost:8123/api/swagger-ui.html`
 
-### 配置说明
+## 配置说明
 核心配置参见：`src/main/resources/application.yml`、`application-local.yml`、`application-prod.yml`
 
 - 应用与服务
@@ -59,7 +59,7 @@ java -jar target/agent-backend-0.0.1-SNAPSHOT.jar
 $env:SPRING_PROFILES_ACTIVE = "prod"; java -jar target/agent-backend-0.0.1-SNAPSHOT.jar
 ```
 
-### 对外接口
+## 对外接口
 Controller 位于 `com.yiye.controller`
 
 - `GET /api/ai/love_app/chat/sync`
@@ -84,12 +84,12 @@ Controller 位于 `com.yiye.controller`
 
 说明：实际返回结构与行为依赖业务实现（`com.yiye.app.LoveApp`、`com.yiye.agent.Manus` 等），可在接口文档页调试
 
-### Swagger/Knife4j
+## Swagger/Knife4j
 - 分组/扫描包在 `application.yml` 中配置：
   - `springdoc.group-configs[0].packages-to-scan: com.yiye.controller`
 - 访问路径：`/api/swagger-ui.html`
 
-### MCP（Model Context Protocol）
+## MCP（Model Context Protocol）
 本项目演示了 MCP 客户端与服务端：
 
 1) 客户端配置
@@ -109,7 +109,7 @@ java -Dspring.ai.mcp.server.stdio=true -Dspring.main.web-application-type=none -
 ```
 - 也可通过主工程的 `mcp-servers.json` 以 stdio 方式联动
 
-### Docker 运行
+## Docker 运行
 项目根目录提供 `Dockerfile`（主应用）。示例：
 ```bash
 # 构建镜像
@@ -123,15 +123,12 @@ docker run -p 8123:8123 \
   agent-backend:latest
 ```
 
-### 开发提示
+## 开发提示
 - 代码入口：`com.yiye.AgentBackendApplication`
 - 默认排除了 `PgVectorStoreAutoConfiguration`，如需自动装配请调整依赖与注解
 - CORS 等跨域配置可见 `com.yiye.config`
 
-### 常见问题
+## 常见问题
 - 文档页访问不到？请确认应用已启动，端口为 8123，路径含 `/api`
 - SSE 接口在浏览器中仅显示流式文本，建议使用 cURL 或前端 EventSource 进行调试
 - 密钥与连接串请使用环境变量或外部化配置，不要提交到版本库
-
-### 许可
-本项目仅供学习与演示使用，商业使用请自查依赖与数据合规性

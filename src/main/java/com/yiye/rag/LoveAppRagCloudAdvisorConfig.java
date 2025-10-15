@@ -30,4 +30,5 @@ class LoveAppRagCloudAdvisorConfig {
                 .documentRetriever(documentRetriever)
                 .build();
     }
+
 }

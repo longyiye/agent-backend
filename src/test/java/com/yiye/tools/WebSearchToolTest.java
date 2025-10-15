@@ -19,4 +19,5 @@ public class WebSearchToolTest {
         String result = tool.searchWeb(query);
         assertNotNull(result);
     }
+
 }

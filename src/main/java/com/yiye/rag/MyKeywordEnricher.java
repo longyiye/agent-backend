@@ -20,4 +20,5 @@ class MyKeywordEnricher {
         KeywordMetadataEnricher enricher = new KeywordMetadataEnricher(this.dashscopeChatModel, 5);
         return enricher.apply(documents);
     }
+
 }

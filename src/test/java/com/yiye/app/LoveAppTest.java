@@ -87,4 +87,5 @@ class LoveAppTest {
         String answer = loveApp.doChatWithMcp(message, chatId);
         Assertions.assertNotNull(answer);
     }
+
 }

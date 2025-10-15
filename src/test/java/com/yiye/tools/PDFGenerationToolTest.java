@@ -16,4 +16,5 @@ public class PDFGenerationToolTest {
         String result = tool.generatePDF(fileName, content);
         assertNotNull(result);
     }
+
 }

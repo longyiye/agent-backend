@@ -18,4 +18,5 @@ public class LoveAppContextualQueryAugmenterFactory {
                 .emptyContextPromptTemplate(emptyContextPromptTemplate)
                 .build();
     }
+
 }

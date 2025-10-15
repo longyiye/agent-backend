@@ -20,4 +20,5 @@ public class OllamaInvoke implements CommandLineRunner {
                 .getOutput();
         System.out.println(output.getText());
     }
+
 }

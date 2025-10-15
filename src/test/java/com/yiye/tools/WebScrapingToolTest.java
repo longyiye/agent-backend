@@ -15,4 +15,5 @@ public class WebScrapingToolTest {
         String result = tool.scrapeWebPage(url);
         assertNotNull(result);
     }
+
 }
